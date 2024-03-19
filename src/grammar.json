@@ -2,17 +2,20 @@
   "name": "fishshell",
   "rules": {
     "source": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "fish_source"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "output"
-        }
-      ]
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "fish_source"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "output"
+          }
+        ]
+      }
     },
     "fish_source": {
       "type": "SEQ",
@@ -61,24 +64,43 @@
       "value": "\\$ +"
     },
     "output": {
-      "type": "REPEAT1",
+      "type": "PREC_LEFT",
+      "value": 0,
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_text"
-          },
-          {
-            "type": "STRING",
-            "value": "\n"
-          }
-        ]
+        "type": "REPEAT1",
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[^\\$]"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_text"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "\n"
+            }
+          ]
+        }
       }
     },
     "_text": {
-      "type": "PATTERN",
-      "value": "[^\\n]*"
+      "type": "REPEAT1",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\n]"
+      }
     }
   },
   "extras": [

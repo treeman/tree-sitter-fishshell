@@ -4,14 +4,14 @@ module.exports = grammar({
   extras: (_) => ["\r", " "],
 
   rules: {
-    source: ($) => seq($.fish_source, $.output),
+    source: ($) => repeat1(choice($.fish_source, $.output)),
 
     fish_source: ($) => seq($.marker, $.code),
     code: ($) => seq($._text, repeat(seq("\\\n", $._text)), "\n"),
     marker: (_) => /\$ +/,
 
-    output: ($) => repeat1(seq($._text, "\n")),
+    output: ($) => prec.left(repeat1(seq(/[^\$]/, optional($._text), "\n"))),
 
-    _text: (_) => /[^\n]*/,
+    _text: (_) => repeat1(/[^\n]/),
   },
 });
