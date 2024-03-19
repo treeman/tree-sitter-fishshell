@@ -1,0 +1,62 @@
+[
+  {
+    "type": "code",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "fish_source",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "code",
+          "named": true
+        },
+        {
+          "type": "marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "output",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "source",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fish_source",
+          "named": true
+        },
+        {
+          "type": "output",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\n",
+    "named": false
+  },
+  {
+    "type": "\\\n",
+    "named": false
+  },
+  {
+    "type": "marker",
+    "named": true
+  }
+]

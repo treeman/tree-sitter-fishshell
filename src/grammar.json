@@ -1,0 +1,99 @@
+{
+  "name": "fishshell",
+  "rules": {
+    "source": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "fish_source"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "output"
+        }
+      ]
+    },
+    "fish_source": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "code"
+        }
+      ]
+    },
+    "code": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_text"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "\\\n"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_text"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        }
+      ]
+    },
+    "marker": {
+      "type": "PATTERN",
+      "value": "\\$ +"
+    },
+    "output": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_text"
+          },
+          {
+            "type": "STRING",
+            "value": "\n"
+          }
+        ]
+      }
+    },
+    "_text": {
+      "type": "PATTERN",
+      "value": "[^\\n]*"
+    }
+  },
+  "extras": [
+    {
+      "type": "STRING",
+      "value": "\r"
+    },
+    {
+      "type": "STRING",
+      "value": " "
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
